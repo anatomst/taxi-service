@@ -44,3 +44,10 @@ def check_license_number(number):
     if not number[3:].isdigit():
         raise ValidationError("Last 5 characters must be numbers.")
     return number
+
+
+class DriverSearchForm(forms.Form):
+    last_name = forms.CharField(max_length=255,
+                                required=False,
+                                label="",
+                                widget=forms.TextInput(attrs={"placeholder": "Search by last name..."}))
