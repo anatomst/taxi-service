@@ -6,14 +6,31 @@
         <a style="float: right" class="btn btn-success" href="{% url 'taxi:car-create' %}">Create new car</a>
     </h1>
     {% if car_list %}
-        <ul>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Country</th>
+            </tr>
+
             {% for car in car_list %}
-                <li>
-                    <a href="{% url "taxi:car-detail" pk=car.id %} ">
-                    {{ car.model }} ({{ car.manufacturer.name }})</a>
-                </li>
+                <tr>
+                    <td>
+                        {{ car.id }}
+                    </td>
+                    <td>
+                        <a href="{% url "taxi:car-detail" pk=car.id %} ">{{ car.model }}</a>
+                    </td>
+                    <td>
+                        {{ car.manufacturer.name }}
+                    </td>
+                    <td>
+                        {{ car.manufacturer.country }}
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>There are no cars in taxi</p>
     {% endif %}
