@@ -28,9 +28,11 @@ python manage.py runserver
 
 ## Full access:
 
-* username: 
-* password: 
+* username: user123
+* password: ASDZXCasdzxc123
 
 ## Demo
 
 ![Website Interface](demo.png)
+
+![Website Interface](demo1.png)
