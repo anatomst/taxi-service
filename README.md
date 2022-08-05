@@ -4,7 +4,7 @@ Django project for managing drivers, cars and manufacturers for Taxi Service
 
 ## Check it out!
 
-[Taxi Service project on Heroku]()
+[Taxi Service project on Heroku](https://taxi-app-service.herokuapp.com/)
 
 ## Installation
 
