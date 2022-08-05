@@ -3,10 +3,10 @@
 {% block content %}
     <span style="float: right">
         {% if user in car.drivers.all %}
-            <p>You are the driver of this car! <a class="btn btn-danger"
+            <p>You are a driver of this car! <a class="btn btn-danger"
                                                   href="{% url 'taxi:manipulation_with_car' pk=car.pk %}">Delete me from this car</a></p>
         {% else %}
-            <p>You are not the driver of this car! <a class="btn btn-success"
+            <p>You are not a driver of this car! <a class="btn btn-success"
                                                       href="{% url 'taxi:manipulation_with_car' pk=car.pk %}">Assign me to this car</a></p>
         {% endif %}
     </span>
