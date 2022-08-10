@@ -18,9 +18,7 @@ class PublicManufacturerTest(TestCase):
 class PrivateTest(TestCase):
     def setUp(self) -> None:
         self.user = get_user_model().objects.create_user(
-            username="driver",
-            password="driver12345",
-            license_number="AAA12345"
+            username="driver", password="driver12345", license_number="AAA12345"
         )
         self.client.force_login(self.user)
 
@@ -33,7 +31,9 @@ class PrivateTest(TestCase):
         manufacturers = Manufacturer.objects.all()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(list(response.context["manufacturer_list"]), list(manufacturers))
+        self.assertEqual(
+            list(response.context["manufacturer_list"]), list(manufacturers)
+        )
         self.assertTemplateUsed(response, "taxi/manufacturer_list.html")
 
     def test_retrieve_car(self):
@@ -66,7 +66,7 @@ class PrivateDriverTests(TestCase):
             "password2": "user123test",
             "first_name": "Test first",
             "last_name": "Test last",
-            "license_number": "AAA12345"
+            "license_number": "AAA12345",
         }
         self.client.post(reverse("taxi:driver-create"), data=form_data)
         new_user = get_user_model().objects.get(username=form_data["username"])

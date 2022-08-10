@@ -9,7 +9,11 @@ from taxi.models import Driver, Car
 class DriverCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Driver
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'license_number',)
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "license_number",
+        )
 
     def clean_license_number(self):
         license_number = self.cleaned_data["license_number"]
@@ -17,9 +21,11 @@ class DriverCreationForm(UserCreationForm):
 
 
 class CarForm(forms.ModelForm):
-    drivers = forms.ModelMultipleChoiceField(queryset=get_user_model().objects.all(),
-                                             widget=forms.CheckboxSelectMultiple,
-                                             required=False)
+    drivers = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
 
     class Meta:
         model = Car
@@ -38,7 +44,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
 
 def check_license_number(number):
     if len(number) != 8:
-        raise ValidationError("License must have 8 digits.")
+        raise ValidationError("License must have 8 characters.")
     if not number[:3].isupper():
         raise ValidationError("First 3 characters must be upper letters.")
     if not number[3:].isdigit():
@@ -47,7 +53,9 @@ def check_license_number(number):
 
 
 class DriverSearchForm(forms.Form):
-    last_name = forms.CharField(max_length=255,
-                                required=False,
-                                label="",
-                                widget=forms.TextInput(attrs={"placeholder": "Search by last name..."}))
+    last_name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by last name..."}),
+    )

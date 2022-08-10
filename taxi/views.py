@@ -5,7 +5,12 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import DriverCreationForm, DriverLicenseUpdateForm, CarForm, DriverSearchForm
+from .forms import (
+    DriverCreationForm,
+    DriverLicenseUpdateForm,
+    CarForm,
+    DriverSearchForm,
+)
 from .models import Driver, Car, Manufacturer
 
 
@@ -93,9 +98,7 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
 
         last_name = self.request.GET.get("last_name", "")
 
-        context["search_form"] = DriverSearchForm(initial={
-            "last_name": last_name
-        })
+        context["search_form"] = DriverSearchForm(initial={"last_name": last_name})
 
         return context
 
@@ -103,7 +106,9 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
         form = DriverSearchForm(self.request.GET)
 
         if form.is_valid():
-            return self.queryset.filter(last_name__icontains=form.cleaned_data["last_name"])
+            return self.queryset.filter(
+                last_name__icontains=form.cleaned_data["last_name"]
+            )
 
         return self.queryset
 
